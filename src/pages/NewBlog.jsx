@@ -13,7 +13,9 @@ import {toastSuccessNotify} from "../helpers/toastNotify";
 const initialValues = { 
   title: "",
   imageURL: "",
-  content: ""
+  content: "",
+  like:0,
+  comment:0
 };
 
 const NewBlog = () => {
