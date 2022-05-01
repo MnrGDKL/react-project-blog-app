@@ -102,11 +102,11 @@ const Details = () => {
               <IconButton aria-label="add to favorites">
                 <FavoriteIcon />
               </IconButton>
-              <span>1</span>
+              <span>{item.like}</span>
               <IconButton aria-label="comment">
                 <ChatBubbleOutlineIcon />
               </IconButton>
-              <span>1</span>
+              <span>{item.comment}</span>
             </CardActions>
           </Card>
           {item.author === user?.email ? (
