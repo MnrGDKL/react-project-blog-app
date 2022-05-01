@@ -17,6 +17,8 @@ const time = d.toLocaleDateString();
 
 const BlogContextProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
+  const [like, setLike] = useState(0);
+  const [comment, setComment] = useState(0);
 
   //!Add Blog to database
   const AddBlog = (info) => {
@@ -29,6 +31,8 @@ const BlogContextProvider = ({ children }) => {
       content: info.content,
       author: user.email,
       date: time,
+      like: info.like,
+      comment: info.comment
     });
   };
 
@@ -72,10 +76,32 @@ const BlogContextProvider = ({ children }) => {
     return update(ref(database), updates);
   };
 
+  //!incease like
+  const increaseLike = (id) => {
+    const database = getDatabase();
+    const updates = {};
+    updates["blogDB/" + id + "/like"] = like + 1;
+    return update(ref(database), updates);
+  };
 
+  //!Descrease like
+  const decreaseLike = (id) => {
+    const database = getDatabase();
+    const updates = {};
+    updates["blogDB/" + id + "/like"] = like - 1;
+    return update(ref(database), updates);
+  };
 
   return (
-    <BlogContext.Provider value={{ AddBlog, GetBlogs, DeleteBlog, EditBlog }}>
+    <BlogContext.Provider 
+      value={{ 
+        AddBlog,
+        GetBlogs,
+        DeleteBlog,
+        EditBlog,
+        increaseLike,
+        decreaseLike
+        }}>
       {children}
     </BlogContext.Provider>
   );
