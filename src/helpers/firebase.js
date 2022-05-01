@@ -30,7 +30,7 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 //! register user
-export const signUp = (email,password,toastSuccessNotify, toastErrorNotify, navigate, setUser, resetForm) => {
+export const signUp = (email,password,toastSuccessNotify, toastErrorNotify, navigate, user, setUser) => {
   try {
     createUserWithEmailAndPassword(auth, email, password);
     navigate("/");
@@ -44,13 +44,12 @@ export const signUp = (email,password,toastSuccessNotify, toastErrorNotify, navi
 };
 
 //! login user
-export const signIn = (email, password, toastSuccessNotify, toastErrorNotify, navigate, setUser, resetForm) => {
+export const signIn = (email, password, toastSuccessNotify, toastErrorNotify, navigate, user, setUser) => {
   signInWithEmailAndPassword(auth, email, password)
   .then(() => {
     toastSuccessNotify("🦄 Logged in successfully!");
     navigate("/");
     console.log("Logged In:", email)
-
 
   })
   .catch(error => {
