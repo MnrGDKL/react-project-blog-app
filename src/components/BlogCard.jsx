@@ -10,34 +10,43 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../contexts/AuthContext";
+import { toastWarnNotify } from "../helpers/toastNotify";
+import { BlogContext } from "../contexts/BlogContext";
 
 export default function BlogCard({ item, index }) {
-  const [likeNumber, setLikeNumber] = useState(0);
-  const [likeColor, setLikeColor] = useState();
   const [click, setClick] = useState(true);
   const navigate = useNavigate();
-
-  ///like make red and +1 function
+  const {user} = React.useContext(AuthContext)   ///like make red and +1 function
+  const {increaseLike, decreaseLike} = React.useContext(AuthContext)
+  const {GetBlogs} = React.useContext(BlogContext);
+  const {blogList, isLoading} = GetBlogs();
+  
   const handleLike = () => {
     if (click) {
-      setLikeNumber(likeNumber + 1);
-      setLikeColor("red");
-      setClick(!click);
-    } else {
-      setLikeNumber(likeNumber - 1);
-      setLikeColor();
-      setClick(!click);
-    }
-  };
+        increaseLike(item.id);
+        setClick(!click);
+      } else {
+        decreaseLike(item.id)
+        setClick(!click);
+      }
+    };
+
+  const handleComment = () => {
+  }
 
   const handleClick = () => {
-    navigate("/details", { state: { item } });
+    if (!user) {
+      toastWarnNotify("You need to login first");
+      navigate("/login");
+    } else {navigate("/details", { state: { item } })}
   };
 
   return (
     <Card sx={{ width: 300, 
                 cursor:"pointer",
                 borderRadius: "10px",
+                padding:"3px",
                 ":hover": {boxShadow: "0 0 10px #046582"}}}>
       <div onClick={handleClick}>
         <div style={{display: "flex", 
@@ -68,12 +77,14 @@ export default function BlogCard({ item, index }) {
             <div
               style={{
                 paddingTop: "1rem",
-                textAlign: "center",
+                textAlign: "justify",
                 color: "#046582",
+                borderRadius: "10px"
               }}
             >
+            {`${item.content}`.substring(0, 100) + `...`}
             </div>
-            {`${item.content}`.substring(0, 80) + `...`}
+
           </Typography>
 
           <Typography
@@ -91,19 +102,18 @@ export default function BlogCard({ item, index }) {
 
       <CardActions disableSpacing>
         <IconButton
-          onClick={() => {
-            handleLike();
-          }}
-          sx={{ color: `${likeColor}` }}
+          onClick={handleLike}
+          sx={{ color: `${item.like > 0 ? "red" : ""}` }}
           aria-label="add to favorites"
         >
           <FavoriteIcon />
         </IconButton>
-        <span>{likeNumber}</span>
-        <IconButton aria-label="comment">
+        <span>{item.like}</span>
+        <IconButton aria-label="comment"
+                    onClick={handleComment}>
           <ChatBubbleOutlineIcon />
         </IconButton>
-        <span>0</span>
+        <span>{item.comment}</span>
       </CardActions>
     </Card>
   );
