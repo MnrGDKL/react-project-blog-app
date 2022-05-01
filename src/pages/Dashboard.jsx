@@ -13,10 +13,9 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h3 style={{textAlign: "center", 
-                  backgroundColor: "yellow"}}>
+      <h1 style={{textAlign: "center"}}>
           ──── Dashboard ────
-      </h3>
+      </h1>
       <div
         style={{
           display: "flex",
