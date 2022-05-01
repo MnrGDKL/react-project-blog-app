@@ -23,8 +23,6 @@ const Login = () => {
   const {user, setUser} = useContext(AuthContext)
 
 
-
-
   const initialValues = {
     email: "",
     password: "",
@@ -45,16 +43,16 @@ const Login = () => {
        toastErrorNotify, 
        navigate,
        resetForm);
+       setUser(user)
   };
 
   const handleGoogleSingIn = () => {
     loginWithGoogle(
       toastSuccessNotify,
       toastErrorNotify,
-      setUser,
       navigate)
+      setUser(user)
 }
-console.log("Login Page - User", user)
   return (
     <Container className="login-container" 
                sx={{width:"500px", 
