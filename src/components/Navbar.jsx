@@ -68,7 +68,7 @@ const Navbar = () => {
         navigate('/new-blog');
         break;
       case "Logout":
-        navigate('/login');
+        navigate('/');
         setUser(false);
         break;
       case "Login":
@@ -163,7 +163,7 @@ const Navbar = () => {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <p style={{color: "white", fontSize: "15px", paddingRight: "5px"}}>
-                  {user ? (user.displayName !== null ? user.displayName : user.email.slice(0,user.email.indexOf("@"))) : "Please Login"}
+                  {user ? (user.displayName !== null ? user.displayName : user.email.slice(0,user.email.indexOf("@"))) : "Sign in / Sign Up"}
                 </p>
                 <AccountCircle style={{color:"white"}}/>
               </IconButton>
