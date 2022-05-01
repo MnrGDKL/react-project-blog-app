@@ -3,8 +3,11 @@ import {
   onValue,
   push,
   ref,
-  set } from "firebase/database";
+  set,
+  remove, 
+  update} from "firebase/database";
 import { createContext, useContext, useEffect, useState } from "react";
+import { toastSuccessNotify } from "../helpers/toastNotify";
 import { AuthContext } from "./AuthContext";
 
 export const BlogContext = createContext();
@@ -54,9 +57,25 @@ const BlogContextProvider = ({ children }) => {
     return { blogList, isLoading };
   };
 
+  //!Delete Blog from Database
+  const DeleteBlog = (id) => {
+    const database = getDatabase();
+    remove(ref(database, "blogDB/" + id));
+    toastSuccessNotify("Blog Deleted");
+  };
+
+  //!Update Blog in Database
+  const EditBlog = (info) => {
+    const database = getDatabase();
+    const updates = {};
+    updates["blogDB/" + info.id] = info;
+    return update(ref(database), updates);
+  };
+
+
 
   return (
-    <BlogContext.Provider value={{ AddBlog, GetBlogs }}>
+    <BlogContext.Provider value={{ AddBlog, GetBlogs, DeleteBlog, EditBlog }}>
       {children}
     </BlogContext.Provider>
   );
