@@ -35,16 +35,26 @@ export default function BlogCard({ item, index }) {
   };
 
   return (
-    <Card sx={{ width: 300, height: 550 }}>
+    <Card sx={{ width: 300, 
+                cursor:"pointer",
+                borderRadius: "10px",
+                ":hover": {boxShadow: "0 0 10px #046582"}}}>
       <div onClick={handleClick}>
+        <div style={{display: "flex", 
+                     height:"300px",
+                     alignItems:"center"}}>
         <CardMedia
           component="img"
-          height="200"
+          sx={{margin: "auto", width: 300}}
           image={item.imageURL}
           alt={item.title}
           objectfit="contain"
         />
+        </div>
+        
         <CardContent>
+          <h1 style={{textAlign:"center"}}>{`${item.title}`.substring(0, 20) + ``}</h1>
+          <h6 style={{ color: "grey" }}>{item.date}</h6>
           <Typography
             variant="body2"
             color="text.secondary"
@@ -62,8 +72,6 @@ export default function BlogCard({ item, index }) {
                 color: "#046582",
               }}
             >
-              <h2>{`${item.title}`.substring(0, 20) + `..`}</h2>
-              <h6 style={{ color: "grey" }}>{item.date}</h6>
             </div>
             {`${item.content}`.substring(0, 80) + `...`}
           </Typography>
@@ -95,7 +103,7 @@ export default function BlogCard({ item, index }) {
         <IconButton aria-label="comment">
           <ChatBubbleOutlineIcon />
         </IconButton>
-        <span>1</span>
+        <span>0</span>
       </CardActions>
     </Card>
   );
