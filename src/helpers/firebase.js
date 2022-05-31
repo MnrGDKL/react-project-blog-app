@@ -16,13 +16,13 @@ import {
 
 // Your web app's Firebase configuration
 export const firebaseConfig = {
-  apiKey: "AIzaSyAqojxu_c0NvH4P8pZljG4akVUmfiCMEk8",
-  authDomain: "fireblog-app-5ed62.firebaseapp.com",
-  databaseURL: "https://fireblog-app-5ed62-default-rtdb.firebaseio.com",
-  projectId: "fireblog-app-5ed62",
-  storageBucket: "fireblog-app-5ed62.appspot.com",
-  messagingSenderId: "800215987652",
-  appId: "1:800215987652:web:e9d4aaa738f545ccd22091"
+  apiKey: "AIzaSyBB3U6qYj9LSXM2sDIUppApbR-1YgTW4rA",
+  authDomain: "react-blog-app-f28fb.firebaseapp.com",
+  databaseURL: "https://react-blog-app-f28fb-default-rtdb.firebaseio.com",
+  projectId: "react-blog-app-f28fb",
+  storageBucket: "react-blog-app-f28fb.appspot.com",
+  messagingSenderId: "33543989821",
+  appId: "1:33543989821:web:cfc9d5bb48212c47cf1854"
 };
 
 // Initialize Firebase
